@@ -3,7 +3,7 @@ import pytest
 from datetime import datetime, timedelta
 from faker import Faker
 
-@pytest.fixture(scope="session")
+@pytest.fixture(scope='session')
 def api_client():
     client = APIClient()
     client.auth()
@@ -16,12 +16,12 @@ def booking_dates():
     checkout_date = checking_date + timedelta(days=5)
 
     return {
-        "checkin": checkout_date.strftime('%Y-%m-%d'),
+        "checkin": checking_date.strftime('%Y-%m-%d'),
         "checkout": checkout_date.strftime('%Y-%m-%d')
     }
 
 @pytest.fixture()
-def generate_random_booking_date(booking_dates):
+def generate_random_booking_data(booking_dates):
     faker = Faker()
     firstname = faker.first_name()
     lastname = faker.last_name()
@@ -37,3 +37,5 @@ def generate_random_booking_date(booking_dates):
         "bookingdates": booking_dates,
         "additionalneeds": additionalneeds
     }
+
+    return data
